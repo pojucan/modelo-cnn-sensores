@@ -15,13 +15,69 @@ Durante o treinamento, o código:
 
 - Gera gráficos de desempenho e calibração final.
 
-### Requisitos do sistema
+### Metodologia
 
-- **Python:** 3.10.12
+O pipeline segue os seguintes passos:
 
-**Sistema operacional:** Linux, Windows ou macOS
+**1. Geração de dados sintéticos**
 
-- **Hardware mínimo:**
+- Simula leituras de sensor com ruído decrescente ao longo do tempo
+
+**2. Função de calibração real**
+
+- Função não linear com perturbação senoidal
+
+**3. Treinamento incremental**
+
+- O modelo é treinado época a época
+
+- O ruído diminui progressivamente (simulando estabilização do sensor)
+
+**4. Monitoramento de métricas**
+
+- MAE (Mean Absolute Error)
+
+- $R^{2}$ (Coeficiente de determinação)
+
+- Intensidade média
+
+- Número de anomalias
+
+### Estrutura do projeto
+
+```bash
+.
+├── LICENSE.md
+├── README.md
+├── requirements.txt
+├── src
+│   └── model-cnn-sensor.py
+└── visualization
+    ├── graphics
+    │   ├── anomalias_detectadas.png
+    │   ├── curva_calibracao_cnn.png
+    │   ├── media_intensidade_sensor.png
+    │   └── metricas_treinamento.png
+    ├── model-cnn-sensor.ipynb
+    └── reports
+        ├── anomalias_detectadas.pdf
+        ├── curva_calibracao_cnn.pdf
+        ├── media_intensidade_sensor.pdf
+        └── metricas_treinamento.pdf
+```
+
+### 5. Requisitos do sistema
+
+#### Tecnologias utilizadas
+
+- Python 3.x
+- TensorFlow / Keras
+- NumPy
+- Scikit-learn
+- Matplotlib
+- Linux, Windows ou macOS
+
+#### Hardware mínimo:
 
 - CPU com suporte a operações vetoriais
 
@@ -29,7 +85,25 @@ Durante o treinamento, o código:
 
 - (GPU opcional para acelerar o treinamento TensorFlow)
 
-### Instalação de dependências
+### 6. Como executar
+
+#### 6.1. Clonar repositório
+
+```bash
+git clone git@github.com:pojucan/modelo-cnn-sensores.git
+
+cd modelo-cnn-sensores
+```
+
+#### 6.2. Criar ambiente virtual
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+```
+
+#### 6.3. Instalação de dependências
 
 Digite no terminal:
 
@@ -37,7 +111,13 @@ Digite no terminal:
 pip install -r requirements.txt
 ```
 
-### 1. Geração de dados sintéticos
+#### 6.4. Executar o modelo
+
+```bash
+python3 python src/model-cnn-sensor.py
+```
+
+### 7. O que o programa faz?
 
 - **Função verdadeira do sensor:**
 ```python
@@ -55,7 +135,7 @@ noise_factor = noise_level_initial * np.exp(-0.1 * epoch)
 ```
 Isso simula um sensor que vai sendo "ajustado" com o tempo.
 
-### 2. Modelo de Rede Neural (CNN)
+- **Modelo de Rede Neural (CNN)**
 
 O modelo usa camadas convolucionais 1D para aprender padrões locais das leituras:
 
@@ -78,7 +158,7 @@ model = Sequential([
 
 - **Otimizador:** Adam
 
-### 3. Treinamento Incremental
+- **Treinamento Incremental**
 
 O código treina a CNN por 1 época de cada vez, com novas leituras a cada passo:
 
@@ -97,17 +177,20 @@ Durante o processo, são registradas:
 
 - MAE e $R^{2}$
 
-### 4. Métricas e Visualizações
+- **Métricas e Visualizações**
 
 O script gera quatro figuras principais:
 
-**Média de intensidade ao longo das épocas**
-Mostra a evolução da saída média da CNN.
-Arquivos: media_intensidade_sensor.png / .pdf
+**Média de intensidade ao longo das épocas:**
 
-**Número de anomalias detectadas**
-Mede quantas previsões desviam significativamente.
-Arquivos: anomalias_detectadas.png / .pdf
+- Mostra a evolução da saída média da CNN.
+- Arquivos: media_intensidade_sensor.png / .pdf
+
+**Número de anomalias detectadas:**
+
+- Mede quantas previsões desviam 
+- significativamente.
+- Arquivos: anomalias_detectadas.png / .pdf
 
 **Curva de calibração final**
 Compara a saída da CNN com a linha ideal.
@@ -117,18 +200,25 @@ Arquivos: curva_calibracao_cnn.png / .pdf
 Mostra a evolução das métricas ao longo do treino.
 Arquivos: metricas_treinamento.png / .pdf
 
-### 5. Saídas Geradas
+### 8. Saídas Geradas
 
 MAE final: <#valor>\
 R² final: <#valor>
 
-Figuras salvas como:
+#### 5.1. Os gráficos são salvos em: 
+
+```bash
+visualization/graphics/
+visualization/reports/
+```
+
+#### Figuras salvas como:
 - media_intensidade_sensor.png/.pdf
 - anomalias_detectadas.png/.pdf
 - curva_calibracao_cnn.png/.pdf
 - metricas_treinamento.png/.pdf
 
-### 6. Possíveis Extensões
+### 9. Possíveis Extensões
 
 - Adicionar dropout ou regularização para evitar overfitting.
 
@@ -142,7 +232,7 @@ Figuras salvas como:
 
 - Inseri-lo em uma estrutura de versionamento de dados e fluxo de ajuste de hiperparâmetros (MinIO, LakeFS e MLflow)
 
-### 7. Licença e Créditos
+### 10. Licença e Créditos
 
 **Autor:** Pojucan, M.M.S\
 **Ano:** 2025
