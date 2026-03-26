@@ -205,14 +205,14 @@ Arquivos: metricas_treinamento.png / .pdf
 MAE final: <#valor>\
 R² final: <#valor>
 
-#### 5.1. Os gráficos são salvos em: 
+#### 8.1. Os gráficos são salvos em: 
 
 ```bash
 visualization/graphics/
 visualization/reports/
 ```
 
-#### Figuras salvas como:
+#### 8.2. Figuras salvas como:
 - media_intensidade_sensor.png/.pdf
 - anomalias_detectadas.png/.pdf
 - curva_calibracao_cnn.png/.pdf
