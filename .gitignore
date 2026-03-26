@@ -1,0 +1,59 @@
+# =========================
+# Diretórios
+# =========================
+notes/
+prompts/
+.venv/
+venv/
+env/
+.vscode/
+.idea/
+docs/
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribuição / build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Ambientes
+.env
+.env.*
+
+# Logs
+*.log
+
+# =========================
+# Jupyter / Ciência de Dados
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Sistema operacional
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Git
+# =========================
+*.orig
+
+# =========================
+# Obsidian (opcional)
+# =========================
+.obsidian/workspace.json
+.obsidian/cache/
+
+# =========================
+# Arquivos temporários
+# =========================
+*.swp
+*~
